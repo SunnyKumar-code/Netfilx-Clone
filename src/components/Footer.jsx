@@ -1,11 +1,24 @@
 import React from 'react';
 import { FaGithub, FaLinkedinIn, FaYoutube } from 'react-icons/fa';
 
+/**
+ * Footer Component - Displays the application footer with social media links
+ * Developed by Sunny Kumar
+ * Features:
+ * - Social media links to GitHub, LinkedIn, and YouTube
+ * - Responsive design for different screen sizes
+ * - Developer credit
+ * - Copyright information
+ * - Netflix-inspired styling
+ */
 const Footer = () => {
   return (
     <footer className="bg-black text-gray-500 pt-12 pb-8 px-4 sm:px-8 md:px-12">
       <div className="max-w-6xl mx-auto">
-        {/* Social Media Links */}
+        {/* 
+         * Social Media Links Section
+         * Contains links to developer's profiles with hover effects
+         */}
         <div className="flex justify-center space-x-8 mb-8">
           <a
             href="https://github.com/SunnyKumar-code"
@@ -36,7 +49,10 @@ const Footer = () => {
           </a>
         </div>
 
-        {/* Copyright */}
+        {/* 
+         * Copyright and Information Section
+         * Displays copyright notice, project description, and developer credit
+         */}
         <div className="text-center">
           <p className="text-sm mb-2">
             © {new Date().getFullYear()} Netflix Clone
@@ -53,4 +69,9 @@ const Footer = () => {
   );
 };
 
+/**
+ * This component is part of the Netflix Clone project
+ * It provides a consistent footer across all pages of the application
+ * The social media links connect to the developer's professional profiles
+ */
 export default Footer;

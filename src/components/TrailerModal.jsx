@@ -2,6 +2,17 @@ import React, { useEffect, useState, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 import { FaSpinner, FaPlay } from 'react-icons/fa';
 
+/**
+ * TrailerModal Component - Displays movie trailers in a fullscreen modal
+ * Developed by Sunny Kumar
+ * Features:
+ * - YouTube video embedding with direct video ID mapping
+ * - Loading state with spinner animation
+ * - Error handling with fallback message
+ * - Keyboard navigation (Escape key to close)
+ * - Prevents body scrolling when modal is open
+ */
+
 // Map of movie titles to YouTube trailer IDs
 const TRAILER_MAP = {
     // Marvel movies
@@ -172,7 +183,11 @@ const TrailerModal = ({ movieId, title, onClose }) => {
     const modalRef = useRef(null);
     const contentRef = useRef(null);
 
-    // Find the appropriate video ID based on the movie title
+    /**
+     * Finds the appropriate YouTube video ID based on the movie title
+     * Uses exact or partial matching against the TRAILER_MAP
+     * Falls back to a default trailer if no match is found
+     */
     useEffect(() => {
         try {
             // Clean the title for better matching
@@ -212,7 +227,11 @@ const TrailerModal = ({ movieId, title, onClose }) => {
         }
     }, [title]);
 
-    // Handle keyboard and scroll effects
+    /**
+     * Sets up keyboard event listeners and prevents body scrolling
+     * Allows closing the modal with the Escape key
+     * Restores body scrolling when the modal is closed
+     */
     useEffect(() => {
         // Add event listener to close modal on escape key
         const handleEscKey = (e) => {
@@ -232,7 +251,10 @@ const TrailerModal = ({ movieId, title, onClose }) => {
         };
     }, [onClose]);
 
-    // Close modal when clicking outside
+    /**
+     * Handles clicks outside the modal content to close the modal
+     * Only closes if the click is directly on the backdrop
+     */
     const handleOutsideClick = (e) => {
         if (e.target === modalRef.current) {
             onClose();
@@ -242,6 +264,11 @@ const TrailerModal = ({ movieId, title, onClose }) => {
     // Create YouTube embed URL
     const youtubeEmbedUrl = `https://www.youtube.com/embed/${videoId}?rel=0`;
 
+    /**
+     * Renders the modal with header, content area, and YouTube iframe
+     * Shows loading spinner while the video is being prepared
+     * Displays error message if the trailer cannot be loaded
+     */
     return (
         <div
             className="fixed inset-0 bg-black bg-opacity-95 z-[9999] flex items-center justify-center"

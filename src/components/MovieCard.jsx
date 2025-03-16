@@ -11,6 +11,16 @@ import { addToMyList, removeFromMyList } from '../redux/myListSlice'
 import { toast } from 'react-hot-toast'
 import TrailerModal from './TrailerModal'
 
+/**
+ * MovieCard Component - Displays individual movie cards with hover effects and actions
+ * Developed by Sunny Kumar
+ * Features:
+ * - Interactive hover effects showing movie details
+ * - Add/Remove from My List functionality
+ * - Play trailer functionality
+ * - Fallback image handling
+ * - Responsive design for different screen sizes
+ */
 const MovieCard = ({ movieId, posterPath, title, rating, overview, year }) => {
     const [isHovered, setIsHovered] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
@@ -29,7 +39,10 @@ const MovieCard = ({ movieId, posterPath, title, rating, overview, year }) => {
     // Use title if provided, otherwise use ID as fallback
     const displayTitle = title || movieIdString;
 
-    // Set up image source with proper error handling
+    /**
+     * Sets up the image source with proper error handling
+     * Falls back to Netflix icon if poster path is invalid or unavailable
+     */
     useEffect(() => {
         // Check if poster path is valid
         if (posterPath && posterPath !== "N/A") {
@@ -58,7 +71,10 @@ const MovieCard = ({ movieId, posterPath, title, rating, overview, year }) => {
         setImageLoaded(true);
     };
 
-    // Preload the image
+    /**
+     * Preloads the movie poster image to prevent flickering
+     * Falls back to Netflix icon if the image fails to load
+     */
     useEffect(() => {
         if (imageSrc && imageSrc !== netflixIcon) {
             const img = new Image();
@@ -72,7 +88,10 @@ const MovieCard = ({ movieId, posterPath, title, rating, overview, year }) => {
         }
     }, [imageSrc]);
 
-    // Handle adding/removing from My List
+    /**
+     * Handles adding or removing a movie from the user's list
+     * Dispatches Redux actions and shows toast notifications
+     */
     const handleMyListClick = (e) => {
         e.preventDefault(); // Prevent navigation
         e.stopPropagation(); // Prevent event bubbling
@@ -105,6 +124,10 @@ const MovieCard = ({ movieId, posterPath, title, rating, overview, year }) => {
         setShowTrailer(false);
     };
 
+    /**
+     * Renders the movie card with hover effects, loading states, and interactive elements
+     * Includes skeleton loader, poster image, and hover overlay with action buttons
+     */
     return (
         <>
             <div

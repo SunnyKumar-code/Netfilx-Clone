@@ -2,6 +2,15 @@ import React, { useRef, useState, useEffect, useMemo } from 'react'
 import MovieCard from './MovieCard'
 import { IoIosArrowBack, IoIosArrowForward } from 'react-icons/io'
 
+/**
+ * MovieList Component - Displays a horizontal scrollable list of movies with navigation controls
+ * Developed by Sunny Kumar
+ * Features:
+ * - Horizontal scrolling with left/right navigation
+ * - Responsive design for different screen sizes
+ * - Loading skeleton while content is being fetched
+ * - Smooth scrolling animation
+ */
 const MovieList = ({ title, movies, searchMovie = false }) => {
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(true);
@@ -22,7 +31,10 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
         }
     }, [memoizedMovies]);
 
-    // Check scroll position to update arrow visibility
+    /**
+     * Checks the scroll position of the container and updates the state
+     * to determine if the left/right navigation buttons should be enabled
+     */
     const checkScrollPosition = () => {
         const container = sliderRef.current;
         if (!container) return;
@@ -56,7 +68,10 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
         };
     }, [memoizedMovies]);
 
-    // Render loading skeleton
+    /**
+     * Renders a loading skeleton UI while the movie data is being fetched
+     * Shows placeholder cards with loading spinners
+     */
     const renderSkeleton = () => {
         return Array(6).fill(0).map((_, index) => (
             <div
@@ -82,6 +97,11 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
         );
     }
 
+    /**
+     * Handles the scrolling logic when navigation buttons are clicked
+     * Scrolls the container left or right by a fixed amount
+     * @param {string} direction - The direction to scroll ('left' or 'right')
+     */
     const slide = (direction) => {
         const container = sliderRef.current;
         if (!container) return;
@@ -131,6 +151,11 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
                     <IoIosArrowForward size={24} />
                 </button>
 
+                {/* 
+                 * Horizontal scrollable container for movie cards
+                 * Uses custom scrollbar hiding and smooth scrolling behavior
+                 * Displays either loading skeletons or movie cards based on loading state
+                 */}
                 <div
                     ref={sliderRef}
                     className='flex overflow-x-auto no-scrollbar pb-8 pt-2 scroll-smooth gap-4 px-1'
