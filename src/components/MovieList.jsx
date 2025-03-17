@@ -127,30 +127,29 @@ const MovieList = ({ title, movies, searchMovie = false }) => {
         <div className='mb-12 relative'>
             <h1 className={`${searchMovie ? "text-black" : "text-white"} text-2xl sm:text-3xl py-3 font-bold px-4 sm:px-0`}>{title}</h1>
 
-            {/* Navigation Controls Container */}
-            <div className="relative mx-8">
-                {/* Left Arrow - Positioned outside the container */}
-                <button
-                    className="absolute -left-8 top-1/2 transform -translate-y-1/2 z-30 bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300"
-                    onClick={() => slide('left')}
-                    aria-label="Scroll left"
-                    style={{ opacity: canScrollLeft ? 1 : 0.5 }}
-                    disabled={!canScrollLeft}
-                >
-                    <IoIosArrowBack size={24} />
-                </button>
-
-                {/* Right Arrow - Positioned outside the container */}
-                <button
-                    className="absolute -right-8 top-1/2 transform -translate-y-1/2 z-30 bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300"
-                    onClick={() => slide('right')}
-                    aria-label="Scroll right"
-                    style={{ opacity: canScrollRight ? 1 : 0.5 }}
-                    disabled={!canScrollRight}
-                >
-                    <IoIosArrowForward size={24} />
-                </button>
-
+                      {/* Navigation Controls Container */}
+                        <div className="relative mx-8">
+                            {/* Left Arrow - Hidden on mobile, visible on medium screens and up */}
+                            <button
+                                className="hidden md:block absolute -left-8 top-1/2 transform -translate-y-1/2 z-30 bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300"
+                                onClick={() => slide('left')}
+                                aria-label="Scroll left"
+                                style={{ opacity: canScrollLeft ? 1 : 0.5 }}
+                                disabled={!canScrollLeft}
+                            >
+                                <IoIosArrowBack size={24} />
+                            </button>
+            
+                            {/* Right Arrow - Hidden on mobile, visible on medium screens and up */}
+                            <button
+                                className="hidden md:block absolute -right-8 top-1/2 transform -translate-y-1/2 z-30 bg-red-600 text-white p-2 rounded-full shadow-lg hover:bg-red-700 transition-colors duration-300"
+                                onClick={() => slide('right')}
+                                aria-label="Scroll right"
+                                style={{ opacity: canScrollRight ? 1 : 0.5 }}
+                                disabled={!canScrollRight}
+                            >
+                                <IoIosArrowForward size={24} />
+                            </button>
                 {/* 
                  * Horizontal scrollable container for movie cards
                  * Uses custom scrollbar hiding and smooth scrolling behavior
